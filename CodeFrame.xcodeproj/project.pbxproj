@@ -31,6 +31,8 @@
 		D01E5BD92B76119700233E3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D01E5BA02B760D0900233E3E /* Assets.xcassets */; };
 		D01E5BDA2B76140600233E3E /* CodeFrame.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D01E5BA72B760D0900233E3E /* CodeFrame.xcdatamodeld */; };
 		D01E5BDB2B76142F00233E3E /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01E5BA52B760D0900233E3E /* Persistence.swift */; };
+		D05BCA4E2B76383900B1CCC4 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D05BCA4D2B76383900B1CCC4 /* Localizable.xcstrings */; };
+		D05BCA4F2B76383900B1CCC4 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D05BCA4D2B76383900B1CCC4 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +83,7 @@
 		D01E5BDC2B7614A500233E3E /* CodeFrameDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CodeFrameDebug.entitlements; sourceTree = "<group>"; };
 		D01E5BDD2B7614E200233E3E /* CodeFrameWidgetExtensionDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CodeFrameWidgetExtensionDebug.entitlements; sourceTree = "<group>"; };
 		D01E5BDE2B7619A100233E3E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D05BCA4D2B76383900B1CCC4 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +130,7 @@
 		D01E5B9B2B760D0800233E3E /* CodeFrame */ = {
 			isa = PBXGroup;
 			children = (
+				D05BCA4D2B76383900B1CCC4 /* Localizable.xcstrings */,
 				D01E5BDC2B7614A500233E3E /* CodeFrameDebug.entitlements */,
 				D01E5BCF2B76106100233E3E /* Helper */,
 				D01E5BCA2B760D2B00233E3E /* Views */,
@@ -272,6 +276,7 @@
 			files = (
 				D01E5BA42B760D0900233E3E /* Preview Assets.xcassets in Resources */,
 				D01E5BA12B760D0900233E3E /* Assets.xcassets in Resources */,
+				D05BCA4F2B76383900B1CCC4 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +286,7 @@
 			files = (
 				D01E5BD92B76119700233E3E /* Assets.xcassets in Resources */,
 				D01E5BC12B760D2600233E3E /* Assets.xcassets in Resources */,
+				D05BCA4E2B76383900B1CCC4 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,10 +461,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = CodeFrame/CodeFrameDebug.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CodeFrame/Preview Content\"";
-				DEVELOPMENT_TEAM = 8Q8JWS4T6F;
+				DEVELOPMENT_TEAM = XU86G2TH62;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = CodeFrame;
@@ -471,8 +478,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kingstonsze.CodeFrame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vocaltale.app.CodeFrame.Debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -488,7 +496,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CodeFrame/Preview Content\"";
-				DEVELOPMENT_TEAM = 8Q8JWS4T6F;
+				DEVELOPMENT_TEAM = XU86G2TH62;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = CodeFrame;
@@ -501,7 +509,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kingstonsze.CodeFrame;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vocaltale.app.CodeFrame.Release;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -517,7 +525,7 @@
 				CODE_SIGN_ENTITLEMENTS = CodeFrameWidgetExtensionDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8Q8JWS4T6F;
+				DEVELOPMENT_TEAM = XU86G2TH62;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CodeFrameWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CodeFrameWidget;
@@ -528,7 +536,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kingstonsze.CodeFrame.CodeFrameWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vocaltale.app.CodeFrame.Debug.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -544,7 +552,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8Q8JWS4T6F;
+				DEVELOPMENT_TEAM = XU86G2TH62;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CodeFrameWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CodeFrameWidget;
@@ -555,7 +563,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kingstonsze.CodeFrame.CodeFrameWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vocaltale.app.CodeFrame.Release.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;

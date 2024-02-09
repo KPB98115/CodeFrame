@@ -23,7 +23,7 @@ struct AddItemView: View {
             Section {
                 TextField("Enter title", text: $title)
                 TextField("Enter text code", text: $textCode)
-                Toggle("Favorite barcode", isOn: $isFavorite)
+                Toggle("Favorite item", isOn: $isFavorite)
             }
             Section(content: {
                 VStack(alignment:.leading) {
@@ -40,14 +40,14 @@ struct AddItemView: View {
                     defer {
                         dismiss()
                     }
-                    let newBarcode = Item(context: viewContext)
-                    newBarcode.title = title
-                    newBarcode.textCode = textCode
-                    newBarcode.favorite = isFavorite
-                    newBarcode.showAsQRcode = isShowAsQRcode
+                    let newItem = Item(context: viewContext)
+                    newItem.title = title
+                    newItem.textCode = textCode
+                    newItem.favorite = isFavorite
+                    newItem.showAsQRcode = isShowAsQRcode
                     do {
                         try viewContext.save()
-                        WidgetCenter.shared.reloadTimelines(ofKind: "BarcodeDisplayWidget")
+                        WidgetCenter.shared.reloadTimelines(ofKind: "CodeFrameWidget")
                     } catch {
                         let nsError = error as NSError
                         fatalError("Failed to add context: \(nsError), \(nsError.userInfo)")

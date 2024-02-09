@@ -76,9 +76,9 @@ struct CodeFrameWidgetEntryView : View {
         
         var body: some View {
             if entry.item == nil {
-                Text("There is no barcode info yet...")
+                Text("There is no item info yet...")
             } else {
-                Button(intent: SwitchBarcode(), label: {
+                Button(intent: SwitchItem(), label: {
                     ZStack(alignment: .center) {
                         Image(uiImage: qrcodeGenerator(from: entry.item!.textCode!)!)
                             .interpolation(.none)
@@ -93,7 +93,7 @@ struct CodeFrameWidgetEntryView : View {
 //                                    .shadow(color: entry.themeColor.secondary, radius: 5, x: 3, y: 3)
                             )
 //                        HStack(alignment: .top) {
-//                            Text(" \(entry.barcode!.title!) ")
+//                            Text(" \(entry.item!.title!) ")
 //                                .lineLimit(1)
 //                                .truncationMode(.tail)
 //                                .foregroundStyle(entry.themeColor.highlight)
@@ -112,9 +112,9 @@ struct CodeFrameWidgetEntryView : View {
         
         var body: some View {
             if entry.item == nil {
-                Text("There is no barcode info yet...")
+                Text("There is no item info yet...")
             } else {
-                Button(intent: SwitchBarcode(), label: {
+                Button(intent: SwitchItem(), label: {
                     if entry.item!.showAsQRcode || entry.configuration.isDisplayQRcode {
                         ZStack {
                             HStack {
@@ -170,11 +170,11 @@ struct CodeFrameWidgetEntryView : View {
     
     struct LargeWidgetView: View {
         var entry: Provider.Entry
-        let barcodes = getData(isFilterFavItems: false)
+        let items = getData(isFilterFavItems: false)
         
         var body: some View {
             if entry.item == nil {
-                Text("There is no barcode info yet...")
+                Text("There is no item info yet...")
             } else {
                 GeometryReader { geo in
                     VStack(spacing: -1) {
@@ -203,7 +203,7 @@ struct CodeFrameWidgetEntryView : View {
                             VStack {
                                 Text(entry.item!.title!)
                                     .font(.title)
-                                Button(intent: SwitchBarcode(), label: {
+                                Button(intent: SwitchItem(), label: {
                                     Label("Next", systemImage: "arrow.right")
                                         .environment(\.layoutDirection, .rightToLeft)
                                 })
@@ -228,7 +228,7 @@ struct CodeFrameWidget: Widget {
         ) { entry in
             CodeFrameWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("Barcode display widget")
+        .configurationDisplayName("CodeFrame widget")
         .description("Supported small and medium widget size.")
         .supportedFamilies([.systemSmall, .systemMedium])
     }
@@ -248,7 +248,7 @@ private func getData(isFilterFavItems: Bool) -> [Item] {
         return result
     } catch {
         let nsError = error as NSError
-        fatalError("Failed to fetch barcode data: \(nsError.userInfo)")
+        fatalError("Failed to fetch item data: \(nsError.userInfo)")
     }
 }
 

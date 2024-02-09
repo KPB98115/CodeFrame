@@ -70,12 +70,12 @@ struct WidgetThemeQuery: EntityQuery {
     }
 }
 
-struct SwitchBarcode: AppIntent {
-    static var title: LocalizedStringResource = "Tap to switch barcodes"
-    static var description: IntentDescription = "Tap to display the next barcode in the list"
+struct SwitchItem: AppIntent {
+    static var title: LocalizedStringResource = "Tap to switch items"
+    static var description: IntentDescription = "Tap to display the next item in the list"
     
     func increaseWidgetIndex() {
-        func getBarcodeAmount() -> Int {
+        func getItemAmount() -> Int {
             do {
                 let context = PersistenceController.shared.container.viewContext
                 let request = Item.fetchRequest()
@@ -83,12 +83,12 @@ struct SwitchBarcode: AppIntent {
                 return result.count
             } catch {
                 let nsError = error as NSError
-                fatalError("Failed to fetch barcode data: \(nsError.userInfo)")
+                fatalError("Failed to fetch item data: \(nsError.userInfo)")
             }
         }
         
         let defaults = UserDefaults.standard
-        let amount = getBarcodeAmount()
+        let amount = getItemAmount()
         let currentIndex = defaults.integer(forKey: "widgetStateIndex")
         var newIndex: Int = 0
         if amount > 0 {

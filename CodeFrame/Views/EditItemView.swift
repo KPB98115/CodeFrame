@@ -13,7 +13,7 @@ struct EditItemView: View {
     @Environment(\.managedObjectContext) var viewContext
     @Environment(\.dismiss) var dismiss
     
-    var barcode: FetchedResults<Item>.Element
+    var item: FetchedResults<Item>.Element
     
     @State private var title = ""
     @State private var textCode = ""
@@ -29,19 +29,19 @@ struct EditItemView: View {
                     HStack {
                         Text("Title:")
                         Spacer()
-                        TextField(barcode.title!, text: $title)
+                        TextField(item.title!, text: $title)
                             .multilineTextAlignment(.trailing)
                             .onAppear {
-                                self.title = barcode.title!
+                                self.title = item.title!
                             }
                     }
                     HStack {
                         Text("Text code:")
                         Spacer()
-                        TextField(barcode.textCode!, text: $textCode)
+                        TextField(item.textCode!, text: $textCode)
                             .multilineTextAlignment(.trailing)
                             .onAppear {
-                                self.textCode = barcode.textCode!
+                                self.textCode = item.textCode!
                             }
                     }
                     Toggle("Set as favorite barcode", isOn: $isFavorite)
@@ -49,14 +49,14 @@ struct EditItemView: View {
                             isFavorite = newValue // Can not use .toggle(), it cause all item value got toggled on single frame.
                         }
                         .onAppear() { // Assign item value after data processed and before view get render.
-                            isFavorite = barcode.favorite
+                            isFavorite = item.favorite
                         }
                     Toggle("Displayed as QRcode", isOn: $isShowAsQRcode)
                         .onChange(of: isShowAsQRcode) { _, newValue in
                             isShowAsQRcode = newValue
                         }
                         .onAppear() {
-                            isShowAsQRcode = barcode.showAsQRcode
+                            isShowAsQRcode = item.showAsQRcode
                         }
                 }, header: {
                     Text("Information")
@@ -67,12 +67,12 @@ struct EditItemView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onDisappear() {
             do {
-                barcode.title = title
-                barcode.textCode = textCode
-                barcode.favorite = isFavorite
-                barcode.showAsQRcode = isShowAsQRcode
+                item.title = title
+                item.textCode = textCode
+                item.favorite = isFavorite
+                item.showAsQRcode = isShowAsQRcode
                 try viewContext.save()
-                WidgetCenter.shared.reloadTimelines(ofKind: "BarcodeDisplayWidget")
+                WidgetCenter.shared.reloadTimelines(ofKind: "CodeFrameWidget")
             } catch {
                 let nsError = error as NSError
                 fatalError("Failed to save context: \(nsError), \(nsError.userInfo)")

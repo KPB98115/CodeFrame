@@ -12,7 +12,7 @@ import WidgetKit
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.lastModify, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Item.lastModify, ascending: false)],
         animation: .default)
     private var items: FetchedResults<Item>
     
@@ -25,7 +25,7 @@ struct ContentView: View {
                         Text("The list is empty...")
                     }
                     ForEach(items) { item in
-                        NavigationLink(destination: EditItemView(barcode: item)) {
+                        NavigationLink(destination: EditItemView(item: item)) {
                             VStack(alignment: .leading, spacing: 1) {
                                 HStack {
                                     Text(item.title!)
@@ -68,7 +68,7 @@ struct ContentView: View {
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button(action: { showAddView.toggle() }, label: {
-                            Label("Add Barcode", systemImage: "plus.circle")
+                            Label("Add item", systemImage: "plus.circle")
                         })
                     }
                     if !items.isEmpty {
@@ -88,7 +88,7 @@ struct ContentView: View {
 
             do {
                 try viewContext.save()
-                WidgetCenter.shared.reloadTimelines(ofKind: "BarcodeDisplayWidget")
+                WidgetCenter.shared.reloadTimelines(ofKind: "CodeFrameWidget")
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
