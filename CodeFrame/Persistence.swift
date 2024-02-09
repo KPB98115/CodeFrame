@@ -35,7 +35,11 @@ struct PersistenceController {
     init(inMemory: Bool = false) {
         container = NSPersistentCloudKitContainer(name: "CodeFrame")
         // Setup for share coreData with widget extension
+        #if DEBUG
+        let url = URL.storeURL(for: "group.com.vocaltale.app.CodeFrame.deBug", databaseName: "CodeFrame")
+        #else
         let url = URL.storeURL(for: "group.com.vocaltale.app.CodeFrame", databaseName: "CodeFrame")
+        #endif
         let storeDescription = NSPersistentStoreDescription(url: url)
         container.persistentStoreDescriptions = [storeDescription]
         

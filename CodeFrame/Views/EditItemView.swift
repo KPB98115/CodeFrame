@@ -67,8 +67,8 @@ struct EditItemView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onDisappear() {
             do {
-                item.title = title
-                item.textCode = textCode
+                item.title = title.isEmpty ? item.title : title
+                item.textCode = textCode.isEmpty ? item.textCode : textCode
                 item.favorite = isFavorite
                 item.showAsQRcode = isShowAsQRcode
                 try viewContext.save()
