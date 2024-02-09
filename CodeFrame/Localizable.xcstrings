@@ -1,0 +1,295 @@
+{
+  "sourceLanguage" : "zh-Hant",
+  "strings" : {
+    "%@" : {
+
+    },
+    "Add item" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新增項目"
+          }
+        }
+      }
+    },
+    "CodeFrame widget" : {
+
+    },
+    "Configuration" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設定"
+          }
+        }
+      }
+    },
+    "Configure your widget" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設定小工具"
+          }
+        }
+      }
+    },
+    "Display all item or favorite items only." : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "顯示常用項目或所有項目"
+          }
+        }
+      }
+    },
+    "Display favorite items only" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "顯示常用項目"
+          }
+        }
+      }
+    },
+    "Displayed as QRcode" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "展示為QRcode"
+          }
+        }
+      }
+    },
+    "Enter new value:" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入新的值："
+          }
+        }
+      }
+    },
+    "Enter text code" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入新的文字碼："
+          }
+        }
+      }
+    },
+    "Enter title" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入標題"
+          }
+        }
+      }
+    },
+    "Failed to generate image..." : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無法產生圖像......"
+          }
+        }
+      }
+    },
+    "Favorite item" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "常用項目"
+          }
+        }
+      }
+    },
+    "Information" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "項目資訊"
+          }
+        }
+      }
+    },
+    "Inventory" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "列表"
+          }
+        }
+      }
+    },
+    "Last modify: %@" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最後修改： %@"
+          }
+        }
+      }
+    },
+    "Next" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "下一頁"
+          }
+        }
+      }
+    },
+    "QRcode can neither displayed on small widget or medium widget. \nBarcode can only displayed on medium widget." : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "小尺寸小工具只能展示QRcode；中尺寸小工具能夠展示QRcode或條碼。"
+          }
+        }
+      }
+    },
+    "Select widget theme" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "選擇主題"
+          }
+        }
+      }
+    },
+    "Set as favorite barcode" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "常用項目"
+          }
+        }
+      }
+    },
+    "Supported small and medium widget size." : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "支援小型及中型尺寸小工具。"
+          }
+        }
+      }
+    },
+    "Tap to display the next item in the list" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "點擊小工具以切換下個項目"
+          }
+        }
+      }
+    },
+    "Tap to switch items" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "點擊小工具以切換下個項目"
+          }
+        }
+      }
+    },
+    "Tap to switch to next page" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "點擊小工具以切換下一頁"
+          }
+        }
+      }
+    },
+    "TEST" : {
+
+    },
+    "Text code:" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "文字碼："
+          }
+        }
+      }
+    },
+    "The list is empty..." : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "列表內沒有項目......"
+          }
+        }
+      }
+    },
+    "There is no item info yet..." : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "列表內沒有項目......"
+          }
+        }
+      }
+    },
+    "This setting only affect medium widget since barcode can not display on small widget." : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此設定只適用中型尺寸小工具。"
+          }
+        }
+      }
+    },
+    "Title:" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "標題："
+          }
+        }
+      }
+    },
+    "Widget Configurations" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設定小工具"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
