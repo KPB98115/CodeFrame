@@ -8,77 +8,264 @@
 import WidgetKit
 import SwiftUI
 
+import WidgetKit
+import SwiftUI
+
 struct Provider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationAppIntent())
+        let item = getData(isFilterFavItems: false)
+        return SimpleEntry(date: Date(), configuration: ConfigurationAppIntent(), item: item.first, themeColor: WidgetTheme(id: "", primary: .white, secondary: .gray, highlight: .black))
     }
 
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: configuration)
+        let item = getData(isFilterFavItems: configuration.showFavoritesOnly)
+        return SimpleEntry(date: Date(), configuration: configuration, item: item.first, themeColor: configuration.themeColor)
     }
     
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
-        var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
-            entries.append(entry)
+        let item = getData(isFilterFavItems: configuration.showFavoritesOnly)
+        var entry: SimpleEntry
+        if !item.isEmpty {
+            let defaults = UserDefaults.standard
+            let index = defaults.integer(forKey: "widgetStateIndex")
+            entry = SimpleEntry(date: Date(), configuration: configuration, item: item[index], themeColor: configuration.themeColor)
+        } else {
+            entry = SimpleEntry(date: Date(), configuration: configuration, item: nil, themeColor: configuration.themeColor)
         }
 
-        return Timeline(entries: entries, policy: .atEnd)
+        return Timeline(entries: [entry], policy: .never)
     }
 }
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let configuration: ConfigurationAppIntent
+    let item: Item?
+    let themeColor: WidgetTheme
 }
 
 struct CodeFrameWidgetEntryView : View {
     var entry: Provider.Entry
+    @Environment(\.widgetFamily) var widgetFamily
+    @AppStorage("widgetStateIndex") var index = 0
+    @AppStorage("isLargetWidgetExpandableCollapse") var isCollapse = false
 
     var body: some View {
         VStack {
-            Text("Time:")
-            Text(entry.date, style: .time)
-
-            Text("Favorite Emoji:")
-            Text(entry.configuration.favoriteEmoji)
+            switch widgetFamily {
+                case .systemSmall:
+                    SmallWidgetView(entry: entry)
+                        .containerBackground(.white, for: .widget)
+                    //Text("small widget, \(entry.configuration.favoriteEmoji)")
+                case .systemMedium:
+                    MediumWidgetView(entry: entry)
+                        .containerBackground(entry.themeColor.primary, for: .widget)
+                    //Text("medium widget, \(entry.configuration.favoriteEmoji)")
+                case .systemLarge:
+                    LargeWidgetView(entry: entry)
+                        .containerBackground(entry.themeColor.primary, for: .widget)
+                    //Text("large widget, \(entry.configuration.favoriteEmoji)")
+                default:
+                    fatalError("Unsupport widget family")
+            }
         }
     }
+    
+    struct SmallWidgetView: View {
+        var entry: Provider.Entry
+        
+        var body: some View {
+            if entry.item == nil {
+                Text("There is no barcode info yet...")
+            } else {
+                Button(intent: SwitchBarcode(), label: {
+                    ZStack(alignment: .center) {
+                        Image(uiImage: qrcodeGenerator(from: entry.item!.textCode!)!)
+                            .interpolation(.none)
+                            .resizable()
+                            .padding(.all, 5)
+                            .background(
+                                WidgetRectangle(cornerRadius: 15, text: entry.item!.title!, borderColor: entry.themeColor.highlight, shadowColor: entry.themeColor.primary)
+//                                RoundedRectangle(cornerRadius: 15)
+//                                    .scale(x: 1.1, y: 1.1)
+//                                    .stroke(entry.themeColor.highlight, lineWidth: 7)
+//                                    .fill(.white)
+//                                    .shadow(color: entry.themeColor.secondary, radius: 5, x: 3, y: 3)
+                            )
+//                        HStack(alignment: .top) {
+//                            Text(" \(entry.barcode!.title!) ")
+//                                .lineLimit(1)
+//                                .truncationMode(.tail)
+//                                .foregroundStyle(entry.themeColor.highlight)
+//                                .background(entry.themeColor.primary)
+//                                .font(.title3)
+//                        }
+//                        .offset(x: 0, y: -70)
+                    }
+                }).buttonStyle(.plain)
+            }
+        }
+    }
+    
+    struct MediumWidgetView: View {
+        var entry: Provider.Entry
+        
+        var body: some View {
+            if entry.item == nil {
+                Text("There is no barcode info yet...")
+            } else {
+                Button(intent: SwitchBarcode(), label: {
+                    if entry.item!.showAsQRcode || entry.configuration.isDisplayQRcode {
+                        ZStack {
+                            HStack {
+                                VStack(alignment:.leading) {
+                                    Text(entry.item!.title!)
+                                        .font(.title)
+                                        .lineLimit(1)
+                                        .truncationMode(.tail)
+                                        .foregroundStyle(entry.themeColor.highlight)
+                                    Text(entry.item!.textCode!)
+                                        .font(.subheadline)
+                                        .foregroundStyle(entry.themeColor.secondary)
+                                    Text(entry.themeColor.id)
+                                }
+                                Spacer()
+                                ZStack(alignment: .center) {
+                                    Image(uiImage: qrcodeGenerator(from: entry.item!.textCode!)!)
+                                        .interpolation(.none)
+                                        .resizable()
+                                        .padding(.all, 3)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 15, style:.continuous)
+                                                .scale(x: 1.1, y: 1.1)
+                                                .stroke(entry.themeColor.highlight, lineWidth: 7)
+                                                .fill(.white)
+                                                .shadow(color: entry.themeColor.secondary, radius: 5, x: 3, y: 3)
+                                        )
+                                }.frame(width: 125, height: 125).padding(.trailing, 5)
+                            }
+                        }
+                    } else {
+                        ZStack(alignment:.center) {
+                            Image(uiImage: barcodeGenerator(from: entry.item!.textCode!)!)
+                                .interpolation(.none)
+                                .resizable()
+                                .padding(.all, 5)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                        .stroke(entry.themeColor.secondary, lineWidth: 7)
+                                        .fill(.white)
+                                        .shadow(color: entry.themeColor.highlight, radius: 5, x: 3, y: 3)
+                                )
+                            Text(entry.item!.title!)
+                                .offset(y: -50)
+                                .lineLimit(1)
+                                .truncationMode(.tail)
+                        }
+                    }
+                }).buttonStyle(.plain)
+            }
+        }
+    }
+    
+    struct LargeWidgetView: View {
+        var entry: Provider.Entry
+        let barcodes = getData(isFilterFavItems: false)
+        
+        var body: some View {
+            if entry.item == nil {
+                Text("There is no barcode info yet...")
+            } else {
+                GeometryReader { geo in
+                    VStack(spacing: -1) {
+                        ZStack {
+                            Image(uiImage: barcodeGenerator(from: entry.item!.textCode!)!)
+                                .interpolation(.none)
+                                .resizable()
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(lineWidth: 3)
+                                .scale(x: 1, y: 1.03)
+                                .fill()
+                        }.padding(.all, 11)
+                        HStack(spacing: -1) {
+                            VStack {
+                                ZStack(alignment: .center) {
+                                    Image(uiImage: qrcodeGenerator(from: entry.item!.textCode!)!)
+                                        .interpolation(.none)
+                                        .resizable()
+                                        .padding(.all, 5)
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .stroke(lineWidth: 3)
+                                        .scale(x: 1.1, y: 1.1)
+                                        .fill()
+                                }.padding()
+                            }.frame(minWidth: geo.size.width * 1/2).border(.green)
+                            VStack {
+                                Text(entry.item!.title!)
+                                    .font(.title)
+                                Button(intent: SwitchBarcode(), label: {
+                                    Label("Next", systemImage: "arrow.right")
+                                        .environment(\.layoutDirection, .rightToLeft)
+                                })
+                            }.frame(maxWidth: geo.size.width * 1/2).border(.green)
+                        }.frame(maxHeight: geo.size.height * 1/2).border(.green)
+                    }
+                }.border(.red)
+            }
+        }
+    }
+
 }
 
 struct CodeFrameWidget: Widget {
     let kind: String = "CodeFrameWidget"
 
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
+        AppIntentConfiguration(
+            kind: kind,
+            intent: ConfigurationAppIntent.self,
+            provider: Provider()
+        ) { entry in
             CodeFrameWidgetEntryView(entry: entry)
-                .containerBackground(.fill.tertiary, for: .widget)
         }
+        .configurationDisplayName("Barcode display widget")
+        .description("Supported small and medium widget size.")
+        .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
 
-extension ConfigurationAppIntent {
-    fileprivate static var smiley: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "😀"
-        return intent
-    }
-    
-    fileprivate static var starEyes: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "🤩"
-        return intent
+private func getData(isFilterFavItems: Bool) -> [Item] {
+    do {
+        let context = PersistenceController.shared.container.viewContext
+        let request = Item.fetchRequest()
+        if isFilterFavItems {
+            request.predicate = NSPredicate(format: "favorite == %@", true as NSNumber)
+        }
+        let result = try context.fetch(request)
+        if result.isEmpty {
+            return []
+        }
+        return result
+    } catch {
+        let nsError = error as NSError
+        fatalError("Failed to fetch barcode data: \(nsError.userInfo)")
     }
 }
 
-#Preview(as: .systemSmall) {
+private func getPreviewData() -> [Item] {
+    let context = PersistenceController.preview.container.viewContext
+    do {
+        let result =  try context.fetch(Item.fetchRequest())
+        return result
+    } catch {
+        let nsError = error as NSError
+        fatalError("Failed to fetch preview data: \(nsError.userInfo)")
+    }
+}
+
+#Preview(as: .systemMedium) {
     CodeFrameWidget()
 } timeline: {
-    SimpleEntry(date: .now, configuration: .smiley)
-    SimpleEntry(date: .now, configuration: .starEyes)
+    let dummy = getPreviewData()
+    SimpleEntry(date: .now, configuration: ConfigurationAppIntent(), item: dummy.first, themeColor: WidgetTheme(id: "Preview theme", primary: .indigo, secondary: .blue, highlight: .cyan))
 }
