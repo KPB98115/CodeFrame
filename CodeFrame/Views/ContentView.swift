@@ -16,9 +16,11 @@ struct ContentView: View {
         animation: .default)
     private var items: FetchedResults<Item>
     
+    @State private var isExpend = false
+    
     @State private var showAddView = false
     var body: some View {
-        VStack {
+        ZStack(alignment:.bottomTrailing) {
             NavigationStack {
                 List {
                     if items.isEmpty {
@@ -80,6 +82,51 @@ struct ContentView: View {
                     AddItemView()
                 }
             }
+            Button(action: {
+                withAnimation {
+                    isExpend.toggle()
+                }
+            }, label: {
+                VStack {
+                    if isExpend {
+                        Button(action: {
+                            items.sortDescriptors = [SortDescriptor(\Item.lastModify, order: .reverse)]
+                            withAnimation {
+                                isExpend.toggle()
+                            }
+                        }, label: {
+                            Image(systemName: "timer")
+                                .padding()
+                                .foregroundColor(.blue)
+                                .fontWeight(.bold)
+                                .background(
+                                    Circle().stroke(.blue, lineWidth: 3).fill(.white)
+                                )
+                        })
+                        Button(action: {
+                            items.sortDescriptors = [SortDescriptor(\Item.title, order: .reverse)]
+                            withAnimation {
+                                isExpend.toggle()
+                            }
+                        }, label: {
+                            Image(systemName: "textformat.abc.dottedunderline")
+                                .padding()
+                                .foregroundColor(.blue)
+                                .fontWeight(.bold)
+                                .background(
+                                    Circle().stroke(.blue, lineWidth: 3).fill(.white)
+                                )
+                        })
+                    }
+                    Image(systemName: "line.horizontal.3.decrease")
+                        .padding()
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
+                        .background(
+                            Circle().fill(.blue)
+                        )
+                }.frame(width: 55)
+            }).padding(.trailing, 30)
         }
     }
     private func deleteItems(offsets: IndexSet) {

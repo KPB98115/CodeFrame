@@ -51,6 +51,11 @@ struct WidgetTheme: AppEntity {
         WidgetTheme(id: "💙🩵🤍", primary: .indigo, secondary: .blue, highlight: .cyan),
         WidgetTheme(id: "🧡💛🤍", primary: .darkOrange, secondary: .orange, highlight: .yellow),
         WidgetTheme(id: "💜💚🧡", primary: .purple, secondary: .green, highlight: .orange),
+        WidgetTheme(id: "🌊⛴️🐬", primary: .Ocean.grayBlue, secondary: .Ocean.skyBlue, highlight: .Ocean.marineBlue),
+        WidgetTheme(id: "🍒🍇🍊", primary: .SweetFusion.red, secondary: .SweetFusion.yellow, highlight: .SweetFusion.purple),
+        WidgetTheme(id: "🧋🍪🍮", primary: .Dessert.pudding, secondary: .Dessert.chocolate, highlight: .Dessert.earlGray),
+        WidgetTheme(id: "💠🎐❄️", primary: .MorandiBlue.light, secondary: .MorandiBlue.blue, highlight: .MorandiBlue.dark),
+        WidgetTheme(id: "🦄🎀💜", primary: .MorandiPink.light, secondary: .MorandiPink.pink, highlight: .MorandiPink.dark),
     ]
 }
 

@@ -267,5 +267,5 @@ private func getPreviewData() -> [Item] {
     CodeFrameWidget()
 } timeline: {
     let dummy = getPreviewData()
-    SimpleEntry(date: .now, configuration: ConfigurationAppIntent(), item: dummy.first, themeColor: WidgetTheme(id: "Preview theme", primary: .indigo, secondary: .blue, highlight: .cyan))
+    SimpleEntry(date: .now, configuration: ConfigurationAppIntent(), item: dummy.first, themeColor: WidgetTheme(id: "Preview theme", primary: .Ocean.skyBlue, secondary: .Ocean.grayBlue, highlight: .Ocean.marineBlue))
 }
