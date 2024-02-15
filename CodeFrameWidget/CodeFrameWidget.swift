@@ -159,8 +159,16 @@ struct CodeFrameWidgetEntryView : View {
                                 )
                             Text(entry.item!.title!)
                                 .offset(y: -50)
+                                .font(.headline)
                                 .lineLimit(1)
                                 .truncationMode(.tail)
+                                .foregroundStyle(entry.themeColor.secondary)
+                            Text(entry.item!.textCode!)
+                                .offset(y: 50)
+                                .font(.subheadline)
+                                .lineLimit(1)
+                                .truncationMode(.tail)
+                                .foregroundStyle(entry.themeColor.secondary)
                         }
                     }
                 }).buttonStyle(.plain)
