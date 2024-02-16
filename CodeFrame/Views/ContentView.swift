@@ -46,7 +46,8 @@ struct ContentView: View {
                                     Image(uiImage: barcodeImage!)
                                         .resizable()
                                         .interpolation(.none)
-                                        .frame(height: 100)
+                                        .frame(height: 70)
+                                        .padding()
                                 } else {
                                     Text("Failed to generate image...")
                                 }
@@ -60,7 +61,8 @@ struct ContentView: View {
                                             .foregroundStyle(.yellow)
                                     }
                                 }.padding(.leading)
-                            }.frame(width: 350)//.border(.blue)
+                            }
+                            .frame(width: 350)
                         }
                     }.onDelete(perform: deleteItems)
                 }

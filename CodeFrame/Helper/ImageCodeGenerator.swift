@@ -27,6 +27,7 @@ func barcodeGenerator(from textCode: String) -> UIImage? {
     let inputData = textCode.data(using: .ascii)
     
     filter.message = inputData!
+    filter.quietSpace = 5
     
     guard let image = filter.outputImage else {
         return nil

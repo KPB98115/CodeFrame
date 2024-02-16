@@ -150,7 +150,7 @@ struct CodeFrameWidgetEntryView : View {
                             Image(uiImage: barcodeGenerator(from: entry.item!.textCode!)!)
                                 .interpolation(.none)
                                 .resizable()
-                                .padding(.all, 5)
+                                .padding(.all, 20)
                                 .background(
                                     RoundedRectangle(cornerRadius: 15, style: .continuous)
                                         .stroke(entry.themeColor.secondary, lineWidth: 7)

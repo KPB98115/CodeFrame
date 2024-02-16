@@ -51,7 +51,11 @@ struct Collapsible<Content: View>: View {
     var body: some View {
         VStack {
             Button(
-                action: { self.collapsed.toggle() },
+                action: {
+                    withAnimation(.linear) {
+                        self.collapsed.toggle()
+                    }
+                },
                 label: {
                     HStack {
                         self.label()
@@ -68,15 +72,14 @@ struct Collapsible<Content: View>: View {
             }
             .frame(height: collapsed ? .none : 0)
             .clipped()
-            .animation(.linear, value: collapsed)
-            //VStack {
-            //    self.content()
-            //}
-            //.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: collapsed ? 0 : .none)
-            //.clipped()
-            //.animation(.spring, value: collapsed)
-            //.transition(.slide)
-        }//.animation(.easeInOut, value: collapsed)
+            VStack {
+                self.content()
+            }
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: collapsed ? 0 : .none)
+            .clipped()
+            .animation(.spring, value: collapsed)
+            .transition(.slide)
+        }.animation(.easeInOut, value: collapsed)
     }
 }
 
