@@ -127,7 +127,6 @@ struct CodeFrameWidgetEntryView : View {
                                     Text(entry.item!.textCode!)
                                         .font(.subheadline)
                                         .foregroundStyle(entry.themeColor.secondary)
-                                    Text(entry.themeColor.id)
                                 }
                                 Spacer()
                                 ZStack(alignment: .center) {

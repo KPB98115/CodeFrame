@@ -92,6 +92,19 @@ struct ContentView: View {
                 VStack {
                     if isExpend {
                         Button(action: {
+                            items.sortDescriptors = [SortDescriptor(\Item.favorite, order: .reverse)]
+                            withAnimation {
+                                isExpend.toggle()
+                            }
+                        }, label: {
+                            Image(systemName: "star")
+                                .padding()
+                                .foregroundColor(.blue)
+                                .fontWeight(.bold)
+                                .background(
+                                    Circle().stroke(.blue, lineWidth: 3).fill(.white))
+                        })
+                        Button(action: {
                             items.sortDescriptors = [SortDescriptor(\Item.lastModify, order: .reverse)]
                             withAnimation {
                                 isExpend.toggle()
