@@ -20,11 +20,13 @@ struct AddItemView: View {
     
     var body: some View {
         Form {
-            Section {
+            Section(content: {
                 TextField("Enter title", text: $title)
                 TextField("Enter text code", text: $textCode)
                 Toggle("Favorite item", isOn: $isFavorite)
-            }
+            }, footer: {
+                Text("To generate a barcode or QRcode, copy and paste your membership id or any code.")
+            })
             Section(content: {
                 VStack(alignment:.leading) {
                     Toggle("Displayed as QRcode", isOn: $isShowAsQRcode)

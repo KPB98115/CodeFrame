@@ -469,6 +469,23 @@
         }
       }
     },
+    "To generate a barcode or QRcode, copy and paste your membership id or any code." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "把你的載具或會員號碼輸入到文字碼欄位，以生成相應的條碼或QRcode。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "把你的載具或會員號碼輸入到文字碼欄位，以生成相應的條碼或QRcode。"
+          }
+        }
+      }
+    },
     "Widget Configurations" : {
       "localizations" : {
         "en" : {
