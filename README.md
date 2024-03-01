@@ -17,8 +17,5 @@ Widgets, support small and medium widget
 
 https://github.com/KPB98115/CodeFrame/assets/79642613/a2618c73-f33d-4a20-be9e-539f297c7f9e
 
-### How to join the external beta test?
-1. Downlaod TestFlight on AppStore
-2. visit: https://testflight.apple.com/join/R14bEW1V
-3. Install codeFrame via TestFlight
-4. Start testing
+### Download CodeFrame from App Store
+https://apps.apple.com/hk/app/codeframe/id6477673746?l=zh-Hant-TW
