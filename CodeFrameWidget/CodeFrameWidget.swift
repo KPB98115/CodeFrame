@@ -32,7 +32,6 @@ struct Provider: AppIntentTimelineProvider {
         } else {
             entry = SimpleEntry(date: Date(), configuration: configuration, item: nil, themeColor: configuration.themeColor)
         }
-
         return Timeline(entries: [entry], policy: .never)
     }
 }

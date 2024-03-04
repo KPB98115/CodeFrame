@@ -17,11 +17,12 @@ struct ContentView: View {
     private var items: FetchedResults<Item>
     
     @State private var isExpend = false
-    
     @State private var showAddView = false
+    @State private var isMenuShow = true
+    
     var body: some View {
-        ZStack(alignment:.bottomTrailing) {
-            NavigationStack {
+        NavigationStack {
+            ZStack(alignment: .bottomTrailing) {
                 List {
                     if items.isEmpty {
                         Text("The list is empty...")
@@ -83,65 +84,66 @@ struct ContentView: View {
                 }.sheet(isPresented: $showAddView) {
                     AddItemView()
                 }
-            }
-            Button(action: {
-                withAnimation {
-                    isExpend.toggle()
-                }
-            }, label: {
-                VStack {
-                    if isExpend {
-                        Button(action: {
-                            items.sortDescriptors = [SortDescriptor(\Item.favorite, order: .reverse)]
-                            withAnimation {
-                                isExpend.toggle()
-                            }
-                        }, label: {
-                            Image(systemName: "star")
-                                .padding()
-                                .foregroundColor(.blue)
-                                .fontWeight(.bold)
-                                .background(
-                                    Circle().stroke(.blue, lineWidth: 3).fill(.white))
-                        })
-                        Button(action: {
-                            items.sortDescriptors = [SortDescriptor(\Item.lastModify, order: .reverse)]
-                            withAnimation {
-                                isExpend.toggle()
-                            }
-                        }, label: {
-                            Image(systemName: "timer")
-                                .padding()
-                                .foregroundColor(.blue)
-                                .fontWeight(.bold)
-                                .background(
-                                    Circle().stroke(.blue, lineWidth: 3).fill(.white)
-                                )
-                        })
-                        Button(action: {
-                            items.sortDescriptors = [SortDescriptor(\Item.title, order: .reverse)]
-                            withAnimation {
-                                isExpend.toggle()
-                            }
-                        }, label: {
-                            Image(systemName: "textformat.abc.dottedunderline")
-                                .padding()
-                                .foregroundColor(.blue)
-                                .fontWeight(.bold)
-                                .background(
-                                    Circle().stroke(.blue, lineWidth: 3).fill(.white)
-                                )
-                        })
+                
+                Button(action: {
+                    withAnimation {
+                        isExpend.toggle()
                     }
-                    Image(systemName: "line.horizontal.3.decrease")
-                        .padding()
-                        .foregroundColor(.white)
-                        .fontWeight(.bold)
-                        .background(
-                            Circle().fill(.blue)
-                        )
-                }.frame(width: 55)
-            }).padding(.trailing, 30)
+                }, label: {
+                    VStack {
+                        if isExpend {
+                            Button(action: {
+                                items.sortDescriptors = [SortDescriptor(\Item.favorite, order: .reverse)]
+                                withAnimation {
+                                    isExpend.toggle()
+                                }
+                            }, label: {
+                                Image(systemName: "star")
+                                    .padding()
+                                    .foregroundColor(.blue)
+                                    .fontWeight(.bold)
+                                    .background(
+                                        Circle().stroke(.blue, lineWidth: 3).fill(.white))
+                            })
+                            Button(action: {
+                                items.sortDescriptors = [SortDescriptor(\Item.lastModify, order: .reverse)]
+                                withAnimation {
+                                    isExpend.toggle()
+                                }
+                            }, label: {
+                                Image(systemName: "timer")
+                                    .padding()
+                                    .foregroundColor(.blue)
+                                    .fontWeight(.bold)
+                                    .background(
+                                        Circle().stroke(.blue, lineWidth: 3).fill(.white)
+                                    )
+                            })
+                            Button(action: {
+                                items.sortDescriptors = [SortDescriptor(\Item.title, order: .reverse)]
+                                withAnimation {
+                                    isExpend.toggle()
+                                }
+                            }, label: {
+                                Image(systemName: "textformat.abc.dottedunderline")
+                                    .padding()
+                                    .foregroundColor(.blue)
+                                    .fontWeight(.bold)
+                                    .background(
+                                        Circle().stroke(.blue, lineWidth: 3).fill(.white)
+                                    )
+                            })
+                        }
+                        Image(systemName: "line.horizontal.3.decrease")
+                            .padding()
+                            .foregroundColor(.white)
+                            .fontWeight(.bold)
+                            .background(
+                                Circle().fill(.blue)
+                            )
+                    }.frame(width: 55)
+                }).padding(.trailing, 30)
+            }
         }
     }
     private func deleteItems(offsets: IndexSet) {
