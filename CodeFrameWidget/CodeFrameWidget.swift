@@ -77,7 +77,7 @@ struct CodeFrameWidgetEntryView : View {
             if entry.item == nil {
                 Text("There is no item info yet...")
             } else {
-                Button(intent: SwitchItem(), label: {
+                Button(intent: SwitchItem(isShow: entry.configuration.showFavoritesOnly), label: {
                     ZStack(alignment: .center) {
                         Image(uiImage: qrcodeGenerator(from: entry.item!.textCode!)!)
                             .interpolation(.none)
@@ -113,7 +113,7 @@ struct CodeFrameWidgetEntryView : View {
             if entry.item == nil {
                 Text("There is no item info yet...")
             } else {
-                Button(intent: SwitchItem(), label: {
+                Button(intent: SwitchItem(isShow: entry.configuration.showFavoritesOnly), label: {
                     if entry.item!.showAsQRcode || entry.configuration.isDisplayQRcode {
                         ZStack {
                             HStack {
@@ -209,7 +209,7 @@ struct CodeFrameWidgetEntryView : View {
                             VStack {
                                 Text(entry.item!.title!)
                                     .font(.title)
-                                Button(intent: SwitchItem(), label: {
+                                Button(intent: SwitchItem(isShow: entry.configuration.showFavoritesOnly), label: {
                                     Label("Next", systemImage: "arrow.right")
                                         .environment(\.layoutDirection, .rightToLeft)
                                 })

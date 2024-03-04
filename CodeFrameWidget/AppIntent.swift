@@ -79,11 +79,23 @@ struct SwitchItem: AppIntent {
     static var title: LocalizedStringResource = "Tap to switch items"
     static var description: IntentDescription = "Tap to display the next item in the list"
     
+    @Parameter(title: "showFavoriteItemOnly")
+    var isShow: Bool
+    
+    init() {}
+    
+    init(isShow: Bool) {
+        self.isShow = isShow
+    }
+    
     func increaseWidgetIndex() {
         func getItemAmount() -> Int {
             do {
                 let context = PersistenceController.shared.container.viewContext
                 let request = Item.fetchRequest()
+                if isShow {
+                    request.predicate = NSPredicate(format: "favorite == %@", true as NSNumber)
+                }
                 let result = try context.fetch(request)
                 return result.count
             } catch {
